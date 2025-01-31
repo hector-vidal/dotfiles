@@ -32,7 +32,7 @@ Este repositorio contiene mi configuración personal de herramientas de terminal
 
 1. Clona este repositorio:
 ```bash
-git clone https://github.com/[tu-usuario]/dotfiles.git
+git clone https://github.com/hector-vidal/dotfiles.git
 cd dotfiles
 ```
 
