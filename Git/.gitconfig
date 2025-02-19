@@ -1,0 +1,4 @@
+[alias]
+        gll = log --all --color --date='format:%Y-%m-%d %H:%M:%S' --decorate=short --gr>
+
+        gls = log --color --graph --pretty=format:'%C(bold dim white)%cr %C(yellow)-%C(>
