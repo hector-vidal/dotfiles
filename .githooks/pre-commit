@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+#
+# Bloquea commits que contengan secretos.
+#
+# Activar (una sola vez por clon):
+#   git config core.hooksPath .githooks
+#
+# Usa gitleaks si está instalado (`brew install gitleaks`). Si no lo está,
+# aplica un escaneo de respaldo por patrones sobre el contenido en staging,
+# de forma que el repositorio nunca queda sin protección.
+
+set -uo pipefail
+
+RED=$'\033[0;31m'
+YELLOW=$'\033[0;33m'
+GREEN=$'\033[0;32m'
+RESET=$'\033[0m'
+
+# Nada en staging, nada que revisar
+if git diff --cached --quiet; then
+  exit 0
+fi
+
+if command -v gitleaks >/dev/null 2>&1; then
+  if ! gitleaks protect --staged --redact --verbose; then
+    printf '%s\n' \
+      "" \
+      "${RED}COMMIT BLOQUEADO: gitleaks detectó posibles secretos en los cambios en staging.${RESET}" \
+      "" \
+      "Si el hallazgo es real:" \
+      "  1. Quita el secreto del archivo (muévelo a ~/.zshrc.local)." \
+      "  2. Vuelve a añadir el archivo y repite el commit." \
+      "" \
+      "Si es un falso positivo, añade una excepción en .gitleaksignore o usa" \
+      "el comentario '# gitleaks:allow' en la línea correspondiente." >&2
+    exit 1
+  fi
+  exit 0
+fi
+
+printf '%s\n' \
+  "${YELLOW}gitleaks no está instalado; usando el escaneo de respaldo por patrones.${RESET}" \
+  "${YELLOW}Para un análisis completo: brew install gitleaks${RESET}" >&2
+
+# Escaneo de respaldo. Solo mira las líneas añadidas del diff en staging.
+PATTERNS='(BEGIN [A-Z ]*PRIVATE KEY)'
+PATTERNS+='|(gh[pousr]_[A-Za-z0-9]{16,})'
+PATTERNS+='|(github_pat_[A-Za-z0-9_]{20,})'
+PATTERNS+='|(xox[baprs]-[A-Za-z0-9-]{10,})'
+PATTERNS+='|(sk-[A-Za-z0-9]{20,})'
+PATTERNS+='|(AKIA[0-9A-Z]{16})'
+PATTERNS+='|(AIza[0-9A-Za-z_-]{35})'
+PATTERNS+='|((api[_-]?key|secret|token|password|passwd|client[_-]?secret|access[_-]?key)[[:space:]]*[:=][[:space:]]*[^[:space:]$({<]{8,})'
+
+findings=$(
+  git diff --cached --unified=0 --no-color |
+    grep -E '^\+' |
+    grep -Ev '^\+\+\+' |
+    grep -nEi "$PATTERNS"
+)
+
+if [ -n "$findings" ]; then
+  printf '%s\n' \
+    "" \
+    "${RED}COMMIT BLOQUEADO: posible secreto en los cambios en staging.${RESET}" \
+    "" \
+    "$findings" \
+    "" \
+    "Mueve el valor a ~/.zshrc.local (no versionado) y repite el commit." \
+    "Si es un falso positivo, omite el hook con: git commit --no-verify" >&2
+  exit 1
+fi
+
+printf '%s\n' "${GREEN}Sin secretos detectados en los cambios en staging.${RESET}"
+exit 0

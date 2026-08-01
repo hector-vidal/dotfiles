@@ -1,0 +1,73 @@
+[
+  {
+    "id": "zsh",
+    "name": "Zsh",
+    "description": "Configuración de Zsh con Oh My Zsh, prompt de Starship y carga de secretos desde ~/.zshrc.local",
+    "files": [
+      "common/.zshrc",
+      "common/.zshrc.local.example"
+    ]
+  },
+  {
+    "id": "starship",
+    "name": "Starship",
+    "description": "Prompt con módulos de usuario, host, directorio y rama de Git",
+    "files": [
+      "common/.config/starship.toml"
+    ]
+  },
+  {
+    "id": "wezterm",
+    "name": "WezTerm",
+    "description": "Emulador de terminal con tema Dracula, JetBrainsMono Nerd Font y atajos para dividir paneles",
+    "files": [
+      "common/.wezterm.lua"
+    ]
+  },
+  {
+    "id": "rio",
+    "name": "Rio",
+    "description": "Emulador de terminal con tema Dracula, transparencia de ventana y pestañas inferiores",
+    "files": [
+      "common/.config/rio/config.toml",
+      "common/.config/rio/themes/dracula.toml"
+    ]
+  },
+  {
+    "id": "bat",
+    "name": "Bat",
+    "description": "Visor de archivos con tema Dracula corregido para que los números de línea sean legibles",
+    "files": [
+      "common/.config/bat/config",
+      "common/.config/bat/themes/Dracula.tmTheme"
+    ]
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "description": "Alias gll y gls para consultar el historial en formato de grafo",
+    "files": [
+      "common/.gitconfig"
+    ]
+  },
+  {
+    "id": "neovim",
+    "name": "Neovim",
+    "description": "Configuración basada en LazyVim con corrector ortográfico en español y portapapeles para WSL",
+    "files": [
+      "common/.config/nvim/.gitignore",
+      "common/.config/nvim/.neoconf.json",
+      "common/.config/nvim/LICENSE",
+      "common/.config/nvim/README.md",
+      "common/.config/nvim/init.lua",
+      "common/.config/nvim/lazy-lock.json",
+      "common/.config/nvim/lazyvim.json",
+      "common/.config/nvim/lua/config/autocmds.lua",
+      "common/.config/nvim/lua/config/keymaps.lua",
+      "common/.config/nvim/lua/config/lazy.lua",
+      "common/.config/nvim/lua/config/options.lua",
+      "common/.config/nvim/lua/plugins/example.lua",
+      "common/.config/nvim/stylua.toml"
+    ]
+  }
+]

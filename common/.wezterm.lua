@@ -73,9 +73,11 @@ config.keys = {
 -- Tema de la terminal
 config.color_scheme = "Dracula"
 
--- Terminal de WSL
--- config.default_domain = "WSL:Ubuntu-24.04"
-config.default_domain = "WSL:Ubuntu"
+-- Terminal de WSL: solo se aplica en Windows, para que la misma configuración
+-- siga funcionando en macOS y Linux (allí se usa el shell de login del usuario)
+if wezterm.target_triple:find("windows") then
+	config.default_domain = "WSL:Ubuntu"
+end
 
 -- Muestra la barra de desplazamiento
 config.enable_scroll_bar = true

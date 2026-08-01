@@ -1,0 +1,4 @@
+[alias]
+	gll = log --all --color --date='format:%Y-%m-%d %H:%M:%S' --decorate=short --graph --pretty=format:'%C(bold dim white)%ad%C(reset) %C(bold blue)%<(20,trunc)%an%C(reset) %C(bold red)%h%C(reset)%C(green)%d%C(reset)%n%C(dim white)%<(19,trunc)%ar%C(reset) %C(dim cyan)%<(20,trunc)%ae%C(reset) %C(yellow)Commit:%C(reset) %C(bold white)%s%C(reset)%n%C(bold white)%b%C(reset)'
+
+	gls = log --color --graph --pretty=format:'%C(bold dim white)%cr %C(yellow)-%C(reset) %C(bold blue)%<(20,trunc)%an%C(reset)  %C(bold red)%h%C(reset) %C(yellow)-%C(reset)%C(green)%d%C(reset) %s%C(reset)'

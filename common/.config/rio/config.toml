@@ -59,8 +59,12 @@ padding-y = [1, 10]
 #
 # This configuration only has effect if use-fork is disabled.
 #
+# Sin valor, Rio usa el directorio del proceso padre, que es el
+# comportamiento correcto sea cual sea el usuario. No pongas aquí una ruta
+# absoluta con tu nombre de usuario: TOML no expande `$HOME` ni `~`.
+#
 # Example:
-working-dir = "/Users/hp"
+# working-dir = "/ruta/absoluta"
 
 # Environment variables
 #
@@ -339,16 +343,20 @@ clickable = true
 # You can write ovewrite properties like `Shell`, `Navigation`
 # and `Window`.
 #
-# Example:
-[shell]
-# # default (in this case will be used only on MacOS)
-program = "wsl.exe"
-args = ["-d", "Debian", "sh -c 'zsh'"]
+# Sin un `[shell]` en la raíz, Rio arranca el shell de login del usuario en
+# cada SO. Las particularidades se declaran en `[platform]` para que la misma
+# config funcione en macOS, Linux y Windows sin editarla.
 #
-#[platform]
-# # Microsoft Windows overwrite
-#windows.shell.program = "pwsh"
-#windows.shell.args = ["bash"]
+# Example:
+# [shell]
+# # default (in this case will be used only on MacOS)
+# program = "/bin/zsh"
+# args = ["--login"]
+#
+[platform]
+# Microsoft Windows overwrite: arranca WSL en lugar de PowerShell
+windows.shell.program = "wsl.exe"
+windows.shell.args = ["-d", "Debian", "sh -c 'zsh'"]
 #
 # # Linux overwrite
 # linux.shell.program = "tmux"

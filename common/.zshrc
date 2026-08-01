@@ -105,24 +105,37 @@ source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
 alias ls="lsd"
-alias cat="batcat"
-alias windows11="cd /mnt/c/Users/hp/Gitkraken"
 alias man="tldr"
 
+# `bat` se instala como `batcat` en Debian/Ubuntu y como `bat` en el resto
+if (( $+commands[batcat] )); then
+  alias cat="batcat"
+elif (( $+commands[bat] )); then
+  alias cat="bat"
+fi
 
-
+# Acceso al directorio de trabajo en Windows (solo WSL).
+# Si tu usuario de Windows difiere del de Linux, define WIN_USER en ~/.zshrc.local
+if [ -d /mnt/c/Users ]; then
+  alias windows11='cd "/mnt/c/Users/${WIN_USER:-$USER}/Gitkraken"'
+fi
 
 # fnm
-FNM_PATH="/home/eduardo/.local/share/fnm"
+FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/eduardo/.local/share/fnm:$PATH"
+  export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
 fi
 
 # pnpm
-export PNPM_HOME="/home/eduardo/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Configuración local y secretos (NO versionado).
+# Aquí van las API keys, tokens y cualquier `export` con datos sensibles.
+# Mantenerlos fuera de este archivo evita publicarlos al hacer push.
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

@@ -1,0 +1,19 @@
+# Plantilla de ~/.zshrc.local
+#
+# Copiar a $HOME (NO a este repositorio) y rellenar:
+#   cp Zsh/.zshrc.local.example ~/.zshrc.local
+#   chmod 600 ~/.zshrc.local
+#
+# `Zsh/.zshrc` hace `source` de este archivo al final si existe. Todo lo que
+# sea secreto o específico de una máquina va aquí y nunca en el repositorio.
+
+# --- Secretos ---
+# export OPENAI_API_KEY="..."
+# export ANTHROPIC_API_KEY="..."
+# export GITHUB_TOKEN="..."
+# export AWS_ACCESS_KEY_ID="..."
+# export AWS_SECRET_ACCESS_KEY="..."
+
+# --- Ajustes por máquina ---
+# Usuario de Windows, si difiere del de Linux (usado por el alias `windows11`)
+# export WIN_USER="tu-usuario-windows"

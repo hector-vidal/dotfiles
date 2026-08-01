@@ -90,3 +90,55 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+### Secretos y credenciales ###
+# Este es un repositorio de dotfiles: un `export API_KEY=...` añadido por
+# descuido a un archivo de shell se publica en el primer push. Las reglas de
+# abajo son la red de seguridad; el lugar correcto para los secretos es
+# ~/.zshrc.local, que no vive en este repositorio.
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+*.env
+
+# Claves y certificados
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.ppk
+
+# Credenciales de herramientas
+.netrc
+.npmrc
+.pypirc
+.git-credentials
+**/credentials
+**/credentials.json
+.aws/
+.ssh/
+*secret*
+*secrets*
+!*secrets*.example
+
+# Configuración local con secretos, cargada por Zsh/.zshrc desde $HOME.
+# Solo se versiona la plantilla .zshrc.local.example
+.zshrc.local
+
+# Historial de shell (puede contener claves tecleadas en la terminal)
+.zsh_history
+.bash_history
+.node_repl_history
+.python_history
+
+
+
+CLAUDE.md
