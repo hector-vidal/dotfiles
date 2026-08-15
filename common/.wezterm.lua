@@ -79,6 +79,15 @@ if wezterm.target_triple:find("windows") then
 	config.default_domain = "WSL:Ubuntu"
 end
 
+-- macOS: la tecla Option actúa como Alt. Se habilita la composición para que
+-- "Option + n" funcione como tecla muerta: muestra "˜" en espera, y se concreta
+-- con la siguiente pulsación — "Option + n" + "n" escribe "ñ", "Option + n" +
+-- "Shift + n" escribe "Ñ" y "Option + n" + "Espacio" escribe "~" (ASCII)
+if wezterm.target_triple:find("darwin") then
+	config.send_composed_key_when_left_alt_is_pressed = true
+	config.send_composed_key_when_right_alt_is_pressed = true
+end
+
 -- Muestra la barra de desplazamiento
 config.enable_scroll_bar = true
 
