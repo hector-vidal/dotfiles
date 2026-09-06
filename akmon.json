@@ -69,5 +69,14 @@
       "common/.config/nvim/lua/plugins/example.lua",
       "common/.config/nvim/stylua.toml"
     ]
+  },
+  {
+    "id": "claude",
+    "name": "Claude Code",
+    "description": "Statusline que replica el prompt de Starship y añade modelo, uso de contexto y límites de uso (requiere jq; hay que fusionar settings.json.example en ~/.claude/settings.json)",
+    "files": [
+      "common/.claude/statusline-command.sh",
+      "common/.claude/settings.json.example"
+    ]
   }
 ]

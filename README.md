@@ -28,6 +28,12 @@ Este repositorio contiene mi configuración personal de herramientas de terminal
 - Personalización de símbolos y estilos
 - Módulos activados y su configuración
 
+### Claude Code
+[Claude Code](https://claude.com/claude-code) es el CLI de Claude para la terminal. Aquí encontrarás:
+- Script `statusline-command.sh` que replica el prompt de Starship (usuario, host, directorio y rama)
+- Modelo activo, barra de uso del contexto y porcentajes de límite de uso (5 h y 7 d)
+- Plantilla `settings.json.example` con el bloque que activa el statusline
+
 ## 📦 Instalación
 
 1. Clona este repositorio:
@@ -38,7 +44,7 @@ cd dotfiles
 
 2. Crea enlaces simbólicos a los archivos de configuración:
 ```bash
-mkdir -p ~/.config ~/.config/rio ~/.config/bat
+mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude
 
 ln -s "$(pwd)/common/.wezterm.lua"              ~/.wezterm.lua
 ln -s "$(pwd)/common/.zshrc"                    ~/.zshrc
@@ -49,10 +55,16 @@ ln -s "$(pwd)/common/.config/rio/config.toml"   ~/.config/rio/config.toml
 ln -s "$(pwd)/common/.config/rio/themes"        ~/.config/rio/themes
 ln -s "$(pwd)/common/.config/bat/config"        ~/.config/bat/config
 ln -s "$(pwd)/common/.config/bat/themes"        ~/.config/bat/themes
+ln -s "$(pwd)/common/.claude/statusline-command.sh" ~/.claude/statusline-command.sh
 
 # El tema de bat solo se aplica tras reconstruir su caché
 bat cache --build
 ```
+
+El statusline de Claude Code necesita [`jq`](https://jqlang.github.io/jq/) y que
+el bloque `statusLine` de `common/.claude/settings.json.example` se **fusione** a
+mano en `~/.claude/settings.json`: ese archivo también guarda tus plugins y
+ajustes locales, así que no debe sobrescribirse.
 
 3. Crea tu archivo de configuración local para secretos y ajustes por máquina:
 ```bash
@@ -91,7 +103,7 @@ las diferencias por sistema se resuelven dentro de cada archivo (detección de `
 `target_triple` en WezTerm, `[platform]` en Rio) en lugar de duplicar archivos.
 
 `akmon.json` en la raíz es el índice que declara qué se puede instalar. Cada elemento
-(`zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`) se instala por separado.
+(`zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`, `claude`) se instala por separado.
 
 ## ⚙️ Personalización
 
