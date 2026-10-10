@@ -78,5 +78,13 @@
       "common/.claude/statusline-command.sh",
       "common/.claude/settings.json.example"
     ]
+  },
+  {
+    "id": "sincronizar-docs",
+    "name": "Sincronizar docs",
+    "description": "Copia de solo lectura de docs/ de cada repositorio a su ficha en el vault de Obsidian; la invoca el gancho post-commit de cada repositorio",
+    "files": [
+      "common/.local/bin/sincronizar-docs.sh"
+    ]
   }
 ]

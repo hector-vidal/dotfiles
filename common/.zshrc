@@ -120,20 +120,6 @@ if [ -d /mnt/c/Users ]; then
   alias windows11='cd "/mnt/c/Users/${WIN_USER:-$USER}/Gitkraken"'
 fi
 
-# fnm
-FNM_PATH="$HOME/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
-fi
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # Configuración local y secretos (NO versionado).
 # Aquí van las API keys, tokens y cualquier `export` con datos sensibles.

@@ -34,6 +34,9 @@ Este repositorio contiene mi configuración personal de herramientas de terminal
 - Modelo activo, barra de uso del contexto y porcentajes de límite de uso (5 h y 7 d)
 - Plantilla `settings.json.example` con el bloque que activa el statusline
 
+### Sincronizar docs
+Script `sincronizar-docs.sh` que copia la carpeta `docs/` de cada repositorio de `~/Github` a su ficha en el vault de Obsidian (`~/Github/docs/Proyectos-docs/<repositorio>/docs/`). Lo invoca el gancho `post-commit` de cada repositorio; también se ejecuta a mano, sin argumento para todas las fichas o con el nombre de un repositorio.
+
 ## 📦 Instalación
 
 1. Clona este repositorio:
@@ -44,7 +47,7 @@ cd dotfiles
 
 2. Crea enlaces simbólicos a los archivos de configuración:
 ```bash
-mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude
+mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude ~/.local/bin
 
 ln -s "$(pwd)/common/.wezterm.lua"              ~/.wezterm.lua
 ln -s "$(pwd)/common/.zshrc"                    ~/.zshrc
@@ -56,6 +59,7 @@ ln -s "$(pwd)/common/.config/rio/themes"        ~/.config/rio/themes
 ln -s "$(pwd)/common/.config/bat/config"        ~/.config/bat/config
 ln -s "$(pwd)/common/.config/bat/themes"        ~/.config/bat/themes
 ln -s "$(pwd)/common/.claude/statusline-command.sh" ~/.claude/statusline-command.sh
+ln -s "$(pwd)/common/.local/bin/sincronizar-docs.sh" ~/.local/bin/sincronizar-docs.sh
 
 # El tema de bat solo se aplica tras reconstruir su caché
 bat cache --build
@@ -103,7 +107,7 @@ las diferencias por sistema se resuelven dentro de cada archivo (detección de `
 `target_triple` en WezTerm, `[platform]` en Rio) en lugar de duplicar archivos.
 
 `akmon.json` en la raíz es el índice que declara qué se puede instalar. Cada elemento
-(`zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`, `claude`) se instala por separado.
+(`zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`, `claude`, `sincronizar-docs`) se instala por separado.
 
 ## ⚙️ Personalización
 
