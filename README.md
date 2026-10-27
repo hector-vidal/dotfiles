@@ -32,7 +32,8 @@ Este repositorio contiene mi configuración personal de herramientas de terminal
 [Claude Code](https://claude.com/claude-code) es el CLI de Claude para la terminal. Aquí encontrarás:
 - Script `statusline-command.sh` que replica el prompt de Starship (usuario, host, directorio y rama)
 - Modelo activo, barra de uso del contexto y porcentajes de límite de uso (5 h y 7 d)
-- Plantilla `settings.json.example` con el bloque que activa el statusline
+- Plantilla `settings.json.example` con el bloque que activa el statusline y el que deniega `npm` y `npx`
+- `CLAUDE.md` con las reglas globales de Claude Code: `pnpm` en lugar de `npm` y `npx`, reforzado por las funciones `npm` y `npx` de `.zshrc`
 
 ### Sincronizar docs
 Script `sincronizar-docs.sh` que copia la carpeta `docs/` de cada repositorio de `~/Github` a su ficha en el vault de Obsidian (`~/Github/docs/Proyectos-docs/<repositorio>/docs/`). Lo invoca el gancho `post-commit` de cada repositorio; también se ejecuta a mano, sin argumento para todas las fichas o con el nombre de un repositorio.
@@ -59,6 +60,7 @@ ln -s "$(pwd)/common/.config/rio/themes"        ~/.config/rio/themes
 ln -s "$(pwd)/common/.config/bat/config"        ~/.config/bat/config
 ln -s "$(pwd)/common/.config/bat/themes"        ~/.config/bat/themes
 ln -s "$(pwd)/common/.claude/statusline-command.sh" ~/.claude/statusline-command.sh
+ln -s "$(pwd)/common/.claude/CLAUDE.md"             ~/.claude/CLAUDE.md
 ln -s "$(pwd)/common/.local/bin/sincronizar-docs.sh" ~/.local/bin/sincronizar-docs.sh
 
 # El tema de bat solo se aplica tras reconstruir su caché
@@ -66,7 +68,7 @@ bat cache --build
 ```
 
 El statusline de Claude Code necesita [`jq`](https://jqlang.github.io/jq/) y que
-el bloque `statusLine` de `common/.claude/settings.json.example` se **fusione** a
+los bloques `statusLine` y `permissions` de `common/.claude/settings.json.example` se **fusionen** a
 mano en `~/.claude/settings.json`: ese archivo también guarda tus plugins y
 ajustes locales, así que no debe sobrescribirse.
 

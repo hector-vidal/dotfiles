@@ -142,3 +142,5 @@ id_ed25519*
 
 
 CLAUDE.md
+# Reglas globales de Claude Code: sí se versionan (destino ~/.claude/CLAUDE.md)
+!common/.claude/CLAUDE.md

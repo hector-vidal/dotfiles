@@ -107,6 +107,18 @@ eval "$(starship init zsh)"
 alias ls="lsd"
 alias man="tldr"
 
+# npm y npx bloqueados: el gestor de paquetes es pnpm, para personas y agentes de IA.
+# No se traducen en silencio porque pnpm no acepta todos los subcomandos y opciones de npm.
+# Para un caso excepcional queda `command npm` / `command npx`.
+npm() {
+  print -u2 "npm está bloqueado: usa pnpm. npm install → pnpm install o pnpm add <paquete>; npm ci → pnpm install --frozen-lockfile; npm install -g → pnpm add -g <paquete>; npm run → pnpm run."
+  return 1
+}
+npx() {
+  print -u2 "npx está bloqueado: usa pnpm dlx <paquete>, o pnpm exec <binario> si ya está instalado en el proyecto."
+  return 1
+}
+
 # `bat` se instala como `batcat` en Debian/Ubuntu y como `bat` en el resto
 if (( $+commands[batcat] )); then
   alias cat="batcat"
