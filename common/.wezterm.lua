@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 
 -- Tipografía
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
-config.font_size = 11
+config.font_size = 13
 
 -- Transparencia de la terminal
 config.window_background_opacity = 0.8
@@ -36,37 +36,22 @@ config.use_fancy_tab_bar = false
 -- Oculta las tabs si solo está abierta una
 config.hide_tab_bar_if_only_one_tab = true
 
--- Se configuran las teclas para copiar y pegar
+-- Atajos para dividir la terminal. Se usan letras con Ctrl+Shift porque
+-- funcionan igual en cualquier SO y distribución de teclado (en Spanish-ISO
+-- "=" exige Shift y en macOS Option compone caracteres)
 config.keys = {
 	{
-		-- Activa el shortcut de copiar
-		key = "c",
-		mods = "CTRL",
-		action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
-	},
-	{
-		-- Activa el shortcut de pegar
-		key = "v",
-		mods = "CTRL",
-		action = wezterm.action.PasteFrom("Clipboard"),
-	},
-	{
-		-- Activa el shortcut de dividir verticalmente la terminal
-		key = "-",
-		mods = "CTRL",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		-- Activa el shortcut de dividir horizontalmente la terminal
-		key = "=",
-		mods = "CTRL",
+		-- Divide la terminal lado a lado (panel nuevo a la derecha)
+		key = "E",
+		mods = "CTRL|SHIFT",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		-- Cierra la terminal activa
-		key = "w",
-		mods = "CTRL",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		-- Divide la terminal arriba/abajo (panel nuevo debajo). Es la letra O,
+		-- no el cero: Ctrl+Shift+0 es "=" en Spanish-ISO y agranda la fuente
+		key = "O",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 }
 
@@ -77,6 +62,24 @@ config.color_scheme = "Dracula"
 -- siga funcionando en macOS y Linux (allí se usa el shell de login del usuario)
 if wezterm.target_triple:find("windows") then
 	config.default_domain = "WSL:Ubuntu"
+
+	-- Copiar, pegar y cerrar con Ctrl, como en Windows. En macOS y Linux no se
+	-- definen: Ctrl+C debe enviar SIGINT y Ctrl+W borrar la palabra anterior
+	table.insert(config.keys, {
+		key = "c",
+		mods = "CTRL",
+		action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
+	})
+	table.insert(config.keys, {
+		key = "v",
+		mods = "CTRL",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	})
+	table.insert(config.keys, {
+		key = "w",
+		mods = "CTRL",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	})
 end
 
 -- macOS: la tecla Option actúa como Alt. Se habilita la composición para que

@@ -1,0 +1,53 @@
+name: Proponer una mejora
+description: Una opción, un atajo, una herramienta nueva o una mejora de la documentación.
+title: "feat(<herramienta>): "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: herramienta
+    attributes:
+      label: Herramienta
+      options:
+        - zsh
+        - starship
+        - wezterm
+        - rio
+        - bat
+        - git
+        - neovim
+        - claude
+        - sincronizar-docs
+        - repo (README, docs, akmon.json...)
+        - Herramienta nueva
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qué problema resuelve
+      placeholder: Al trabajar en WSL no puedo...
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta
+      description: El cambio concreto. Si afecta a un solo sistema operativo, indica cómo se condicionaría.
+    validations:
+      required: true
+  - type: dropdown
+    id: sistema
+    attributes:
+      label: Sistemas donde lo probaste
+      multiple: true
+      options:
+        - macOS
+        - Linux
+        - Windows + WSL
+        - Todavía no lo probé
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribución
+      options:
+        - label: Puedo abrir el PR yo mismo, siguiendo [CONTRIBUTING.md](https://github.com/hector-vidal/dotfiles/blob/main/CONTRIBUTING.md).

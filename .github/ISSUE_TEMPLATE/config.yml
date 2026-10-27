@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Problema de seguridad o secreto expuesto
+    url: https://www.linkedin.com/in/hz-eduardo-vidal/
+    about: No lo reportes en un issue público. Escríbeme por LinkedIn.
+  - name: Guías de cada herramienta
+    url: https://github.com/hector-vidal/dotfiles/tree/main/docs
+    about: Antes de abrir un issue, revisa la guía de la herramienta y las trampas conocidas del README.

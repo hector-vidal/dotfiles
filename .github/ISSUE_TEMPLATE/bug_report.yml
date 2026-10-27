@@ -1,0 +1,83 @@
+name: Reportar un error
+description: Una configuración no funciona o se comporta distinto a lo documentado.
+title: "fix(<herramienta>): "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Antes de reportar, revisa las [trampas conocidas](https://github.com/hector-vidal/dotfiles#trampas-conocidas) del README: muchos fallos vienen de la instalación (un `~/.config/wezterm/wezterm.lua` viejo, un `bat cache --build` pendiente...).
+  - type: dropdown
+    id: herramienta
+    attributes:
+      label: Herramienta
+      options:
+        - zsh
+        - starship
+        - wezterm
+        - rio
+        - bat
+        - git
+        - neovim
+        - claude
+        - sincronizar-docs
+        - repo (README, docs, akmon.json...)
+    validations:
+      required: true
+  - type: dropdown
+    id: sistema
+    attributes:
+      label: Sistema operativo
+      multiple: true
+      options:
+        - macOS
+        - Linux
+        - Windows + WSL
+    validations:
+      required: true
+  - type: input
+    id: versiones
+    attributes:
+      label: Versiones
+      description: Del sistema y de la herramienta (`wezterm --version`, `nvim --version`, `starship --version`...).
+      placeholder: macOS 15.4, wezterm 20240203-110809-5046fc22
+    validations:
+      required: true
+  - type: dropdown
+    id: instalacion
+    attributes:
+      label: Cómo instalaste
+      options:
+        - akmon
+        - Symlinks a mano
+        - Copiando los archivos
+    validations:
+      required: true
+  - type: input
+    id: teclado
+    attributes:
+      label: Distribución de teclado
+      description: Solo si el fallo es de atajos.
+      placeholder: Spanish-ISO, US...
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      placeholder: |
+        1. Abrir WezTerm.
+        2. Pulsar Ctrl+Shift+O.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Qué esperabas y qué pasó
+      placeholder: Esperaba dividir el panel arriba/abajo; en su lugar, la fuente se agrandó.
+    validations:
+      required: true
+  - type: textarea
+    id: errores
+    attributes:
+      label: Mensajes de error
+      description: El texto exacto. Revisa que no incluya tokens, correos ni rutas privadas.
+      render: text
