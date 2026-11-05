@@ -16,7 +16,6 @@ body:
         - git
         - neovim
         - claude
-        - sincronizar-docs
         - repo (README, docs, akmon.json...)
         - Herramienta nueva
     validations:

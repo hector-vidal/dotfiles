@@ -49,7 +49,6 @@ mano.
 | [Git](https://git-scm.com/) | Alias `gll` y `gls` para ver el historial como grafo | `.gitconfig` | [git.md](docs/git.md) |
 | [Neovim](https://neovim.io/) | [LazyVim](https://www.lazyvim.org/) con corrector en español y portapapeles para WSL | `.config/nvim/` | [neovim.md](docs/neovim.md) |
 | [Claude Code](https://code.claude.com/docs) | Reglas globales (`pnpm` en lugar de `npm`) y un statusline con modelo, contexto y límites de uso | `.claude/` | [claude-code.md](docs/claude-code.md) |
-| Sincronizar docs | Script que copia `docs/` de cada repositorio a un vault de Obsidian | `.local/bin/sincronizar-docs.sh` | [sincronizar-docs.md](docs/sincronizar-docs.md) |
 
 Las rutas de la columna Archivos son relativas a `common/` en el repositorio y a `~` una vez instaladas.
 
@@ -94,7 +93,7 @@ akmon   # en la bienvenida, apunta los dotfiles a hector-vidal/dotfiles
 git clone https://github.com/hector-vidal/dotfiles.git
 cd dotfiles
 
-mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude ~/.local/bin
+mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude
 
 ln -s "$(pwd)/common/.wezterm.lua"                   ~/.wezterm.lua
 ln -s "$(pwd)/common/.zshrc"                         ~/.zshrc
@@ -107,7 +106,6 @@ ln -s "$(pwd)/common/.config/bat/config"             ~/.config/bat/config
 ln -s "$(pwd)/common/.config/bat/themes"             ~/.config/bat/themes
 ln -s "$(pwd)/common/.claude/statusline-command.sh"  ~/.claude/statusline-command.sh
 ln -s "$(pwd)/common/.claude/CLAUDE.md"              ~/.claude/CLAUDE.md
-ln -s "$(pwd)/common/.local/bin/sincronizar-docs.sh" ~/.local/bin/sincronizar-docs.sh
 ```
 
 `ln -s` falla si el destino ya existe: revisa ese archivo, guarda lo que quieras conservar y bórralo o renómbralo antes.
@@ -150,7 +148,6 @@ common/            Archivos que se instalan, con la misma ruta que tendrán bajo
   .zshrc  .zshrc.local.example  .gitconfig  .wezterm.lua
   .config/         starship.toml, nvim/, rio/, bat/
   .claude/         CLAUDE.md, statusline-command.sh, settings.json.example
-  .local/bin/      sincronizar-docs.sh
 docs/              Guía de cada herramienta e imágenes
 akmon.json         Índice de lo que se puede instalar con akmon
 .githooks/         Hook pre-commit que bloquea secretos
@@ -186,7 +183,6 @@ Cada guía explica qué configura el repositorio, cómo seguir configurándolo y
 | Alias de Git y ejemplos de salida | [docs/git.md](docs/git.md) |
 | Ajustes sobre LazyVim y cómo añadir plugins | [docs/neovim.md](docs/neovim.md) |
 | Reglas globales, ajustes y statusline de Claude Code | [docs/claude-code.md](docs/claude-code.md) |
-| Copia de `docs/` al vault de Obsidian | [docs/sincronizar-docs.md](docs/sincronizar-docs.md) |
 | Qué archivos instala cada elemento de akmon | [akmon.json](akmon.json) |
 | Reportar un error, proponer una mejora o abrir un PR | [CONTRIBUTING.md](CONTRIBUTING.md) |
 

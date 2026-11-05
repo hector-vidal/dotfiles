@@ -95,7 +95,7 @@ docs(repo): README y guías por herramienta en docs/
 | Parte | Valores |
 |---|---|
 | Tipo | `feat` (algo nuevo), `fix` (corrección), `docs` (solo documentación), `refactor` (mismo comportamiento, otro código), `chore` (mantenimiento) |
-| Ámbito | El `id` de la herramienta en `akmon.json`: `zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`, `claude`, `sincronizar-docs`. Para lo que está fuera del índice (README, CONTRIBUTING, `.github/`, `.githooks/`): `repo` |
+| Ámbito | El `id` de la herramienta en `akmon.json`: `zsh`, `starship`, `wezterm`, `rio`, `bat`, `git`, `neovim`, `claude`. Para lo que está fuera del índice (README, CONTRIBUTING, `.github/`, `.githooks/`): `repo` |
 
 El título del PR sigue el mismo formato.
 

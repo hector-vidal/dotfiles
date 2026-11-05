@@ -20,7 +20,6 @@ body:
         - git
         - neovim
         - claude
-        - sincronizar-docs
         - repo (README, docs, akmon.json...)
     validations:
       required: true
