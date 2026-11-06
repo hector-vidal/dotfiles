@@ -1,7 +1,7 @@
 # Git
 
 [Git](https://git-scm.com/) es el sistema de control de versiones. Este repositorio aporta dos alias para leer el
-historial como un grafo.
+historial como un grafo y [delta](delta.md) como pager.
 
 ## Instalación
 
@@ -13,6 +13,9 @@ Elemento de akmon: `git`.
 
 Si ya tienes un `~/.gitconfig` con tu nombre y correo, no lo sustituyas: copia solo el bloque `[alias]`, o deja el tuyo e
 incluye este con `git config --global include.path /ruta/al/repo/common/.gitconfig`.
+
+Este `.gitconfig` usa delta como pager: instala delta antes (`brew install git-delta`) o Git fallará al abrir el pager.
+Ver [delta.md](delta.md).
 
 ## Atajos
 
