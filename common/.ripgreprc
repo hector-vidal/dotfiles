@@ -1,0 +1,15 @@
+# Opciones por defecto de ripgrep (rg). Las lee porque config.zsh exporta
+# RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"; ripgrep no busca este archivo por sí solo.
+# Cada línea es un argumento tal cual, sin comillas ni escapes. `rg --debug patrón`
+# muestra qué opciones cargó.
+
+# Mayúsculas solo si el patrón las lleva
+--smart-case
+
+# Buscar también en archivos ocultos, pero nunca dentro de .git
+--hidden
+--glob=!.git/*
+
+# Recortar las líneas muy largas (párrafos de Markdown en una sola línea)
+--max-columns=150
+--max-columns-preview

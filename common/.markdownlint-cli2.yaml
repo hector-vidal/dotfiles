@@ -1,0 +1,16 @@
+# Base de markdownlint-cli2 para todo el equipo. Neovim la pasa con --config
+# (lua/plugins/markdown.lua); el .markdownlint* de un repositorio, si existe, se
+# aplica encima.
+config:
+  # Un párrafo por línea: Obsidian y GitHub ajustan el texto al ancho de la ventana
+  MD013: false
+  # Tablas con | --- | sin alinear las columnas
+  MD060: false
+  # Alerts de GitHub y callouts de Obsidian seguidos, separados por una línea en blanco
+  MD028: false
+  # El title del frontmatter no cuenta como un segundo H1
+  MD025:
+    front_matter_title: ""
+  # Un encabezado puede repetirse si cuelga de secciones distintas
+  MD024:
+    siblings_only: true

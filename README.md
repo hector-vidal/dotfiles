@@ -41,13 +41,17 @@ mano.
 
 | Herramienta | Qué aporta | Archivos | Guía |
 |---|---|---|---|
-| [Zsh](https://www.zsh.org/) + [Oh My Zsh](https://ohmyz.sh/) | Plugins de resaltado y sugerencias, alias (`ls`→`lsd`, `cat`→`bat`, `man`→`tldr`), bloqueo de `npm`/`npx` y secretos fuera del repositorio | `.zshrc`, `.zshrc.local.example` | [zsh.md](docs/zsh.md) |
+| [Zsh](https://www.zsh.org/) + [Oh My Zsh](https://ohmyz.sh/) | Cargador local y configuración versionada: plugins, alias (`ls`→`lsd`, `cat`→`bat`, `man`→`tldr`, `tree`→`broot`), bloqueo de `npm`/`npx` y secretos fuera del repositorio | `.zshrc`, `.config/zsh/config.zsh`, `.zshrc.local.example` | [zsh.md](docs/zsh.md) |
+| [fzf](https://github.com/junegunn/fzf) + [fzf-tab](https://github.com/Aloxaf/fzf-tab) | Buscador difuso con fd y vista previa de bat; `Tab` de Zsh en fzf; `Ctrl-R` libre para Atuin | `.config/zsh/config.zsh` | [fzf.md](docs/fzf.md) |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | Opciones por defecto de `rg`: mayúsculas inteligentes y ocultos sin `.git` | `.ripgreprc` | [ripgrep.md](docs/ripgrep.md) |
 | [Starship](https://starship.rs/) | Prompt con usuario, host, directorio y rama de Git | `.config/starship.toml` | [starship.md](docs/starship.md) |
 | [WezTerm](https://wezterm.org/) | Terminal con transparencia, pestañas abajo y atajos para dividir paneles | `.wezterm.lua` | [wezterm.md](docs/wezterm.md) |
 | [Rio](https://rioterm.com/) | Terminal alternativa con el mismo aspecto | `.config/rio/` | [rio.md](docs/rio.md) |
 | [bat](https://github.com/sharkdp/bat) | `cat` con resaltado, con el tema Dracula corregido para que los números de línea se lean | `.config/bat/` | [bat.md](docs/bat.md) |
 | [Git](https://git-scm.com/) | Alias `gll` y `gls` para ver el historial como grafo | `.gitconfig` | [git.md](docs/git.md) |
-| [Neovim](https://neovim.io/) | [LazyVim](https://www.lazyvim.org/) con corrector en español y portapapeles para WSL | `.config/nvim/` | [neovim.md](docs/neovim.md) |
+| [delta](https://github.com/dandavison/delta) | Pager de Git con resaltado, números de línea y enlaces, tema Dracula | `.gitconfig` | [delta.md](docs/delta.md) |
+| [tmux](https://github.com/tmux/tmux) | Color de 24 bits y enlaces dentro de tmux | `.config/tmux/tmux.conf` | [tmux.md](docs/tmux.md) |
+| [Neovim](https://neovim.io/) | [LazyVim](https://www.lazyvim.org/) con corrector en español, portapapeles para WSL, extras de lenguajes, Markdown renderizado y markdownlint sin falsos avisos | `.config/nvim/`, `.markdownlint-cli2.yaml` | [neovim.md](docs/neovim.md) |
 | [Claude Code](https://code.claude.com/docs) | Reglas globales (`pnpm` en lugar de `npm`) y un statusline con modelo, contexto y límites de uso | `.claude/` | [claude-code.md](docs/claude-code.md) |
 
 Las rutas de la columna Archivos son relativas a `common/` en el repositorio y a `~` una vez instaladas.
@@ -70,10 +74,12 @@ Instala solo los de las herramientas que vayas a usar.
 | Git | Clonar el repositorio | `xcode-select --install` | `sudo apt install git` |
 | JetBrainsMono Nerd Font | Fuente e iconos en todas las terminales | `brew install --cask font-jetbrains-mono-nerd-font` | [nerdfonts.com](https://www.nerdfonts.com/font-downloads) |
 | Zsh + Oh My Zsh | Shell | [ohmyz.sh](https://ohmyz.sh/#install) | `sudo apt install zsh` + [ohmyz.sh](https://ohmyz.sh/#install) |
-| Plugins de Zsh | `zsh-syntax-highlighting`, `zsh-autosuggestions` | Ver [zsh.md](docs/zsh.md#instalación) | Ver [zsh.md](docs/zsh.md#instalación) |
+| Plugins de Zsh | `zsh-syntax-highlighting`, `zsh-autosuggestions`, `fzf-tab` | Ver [zsh.md](docs/zsh.md#instalación) | Ver [zsh.md](docs/zsh.md#instalación) |
 | starship, lsd, bat, tldr | Prompt y alias de `.zshrc` | `brew install starship lsd bat tlrc` | `sudo apt install lsd bat tldr` + [starship](https://starship.rs/#quick-install) |
 | WezTerm o Rio | Emulador de terminal | `brew install --cask wezterm` / `brew install --cask rio` | [wezterm.org](https://wezterm.org/install/linux.html) / [rioterm.com](https://rioterm.com/docs/install) |
 | Neovim | Editor | `brew install neovim` | [neovim.io](https://github.com/neovim/neovim/blob/master/INSTALL.md) |
+| delta | Pager de `.gitconfig` | `brew install git-delta` | Ver [delta.md](docs/delta.md) |
+| fzf, fd, ripgrep, tmux | Búsqueda y multiplexor | `brew install fzf fd ripgrep tmux` | `sudo apt install fzf fd-find ripgrep tmux` |
 | jq | Statusline de Claude Code | `brew install jq` | `sudo apt install jq` |
 
 ### Opción A: akmon
@@ -93,11 +99,15 @@ akmon   # en la bienvenida, apunta los dotfiles a hector-vidal/dotfiles
 git clone https://github.com/hector-vidal/dotfiles.git
 cd dotfiles
 
-mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.claude
+mkdir -p ~/.config ~/.config/rio ~/.config/bat ~/.config/zsh ~/.config/tmux ~/.claude
 
+cp    "$(pwd)/common/.zshrc"                         ~/.zshrc   # copia: es el cargador local
+ln -s "$(pwd)/common/.config/zsh/config.zsh"         ~/.config/zsh/config.zsh
 ln -s "$(pwd)/common/.wezterm.lua"                   ~/.wezterm.lua
-ln -s "$(pwd)/common/.zshrc"                         ~/.zshrc
 ln -s "$(pwd)/common/.gitconfig"                     ~/.gitconfig
+ln -s "$(pwd)/common/.ripgreprc"                     ~/.ripgreprc
+ln -s "$(pwd)/common/.markdownlint-cli2.yaml"        ~/.markdownlint-cli2.yaml
+ln -s "$(pwd)/common/.config/tmux/tmux.conf"         ~/.config/tmux/tmux.conf
 ln -s "$(pwd)/common/.config/starship.toml"          ~/.config/starship.toml
 ln -s "$(pwd)/common/.config/nvim"                   ~/.config/nvim
 ln -s "$(pwd)/common/.config/rio/config.toml"        ~/.config/rio/config.toml
@@ -137,7 +147,12 @@ Para Claude Code, además, **fusiona** a mano los bloques `statusLine` y `permis
   añaden los bloques de la plantilla.
 - **Los plugins `zsh-syntax-highlighting` y `zsh-autosuggestions` no vienen con Oh My Zsh.** Sin clonarlos, Zsh avisa al
   arrancar de que no los encuentra.
-- **El instalador de Oh My Zsh reemplaza `~/.zshrc`.** Instálalo antes de crear el symlink.
+- **El instalador de Oh My Zsh reemplaza `~/.zshrc`.** Instálalo antes de copiar el cargador.
+- **`~/.zshrc` se copia, no se enlaza.** Los instaladores escriben en él rutas del equipo; la configuración versionada
+  está en `~/.config/zsh/config.zsh`. Ver [zsh.md](docs/zsh.md#por-qué-zshrc-no-se-enlaza).
+- **delta tiene que estar instalado antes de usar `.gitconfig`.** Si falta, Git falla al abrir el pager.
+- **`Alt-C` de fzf no llega con este WezTerm**: Option compone caracteres. Se lanza con `Esc` seguido de `c`.
+- **En Debian/Ubuntu, fd se llama `fdfind`.** Sin un enlace `fd`, fzf usa su propio recorrido de archivos.
 - **En Debian/Ubuntu, bat se llama `batcat`.** El alias `cat` de `.zshrc` lo detecta solo.
 - **Con teclado Spanish-ISO, `Ctrl+Shift+O` es la letra O, no el cero.** `Ctrl+Shift+0` en WezTerm agranda la fuente.
 
@@ -145,8 +160,8 @@ Para Claude Code, además, **fusiona** a mano los bloques `statusLine` y `permis
 
 ```text
 common/            Archivos que se instalan, con la misma ruta que tendrán bajo ~
-  .zshrc  .zshrc.local.example  .gitconfig  .wezterm.lua
-  .config/         starship.toml, nvim/, rio/, bat/
+  .zshrc  .zshrc.local.example  .gitconfig  .wezterm.lua  .ripgreprc  .markdownlint-cli2.yaml
+  .config/         starship.toml, zsh/, nvim/, rio/, bat/, tmux/
   .claude/         CLAUDE.md, statusline-command.sh, settings.json.example
 docs/              Guía de cada herramienta e imágenes
 akmon.json         Índice de lo que se puede instalar con akmon
@@ -163,8 +178,8 @@ en esa lista no se instala con akmon.**
 
 ## Secretos
 
-Ningún archivo versionado contiene credenciales. Las API keys y los tokens van en `~/.zshrc.local`, que `.zshrc` carga
-al final y que está en `.gitignore`. El hook `.githooks/pre-commit` revisa cada commit con
+Ningún archivo versionado contiene credenciales. Las API keys y los tokens van en `~/.zshrc.local`, que `config.zsh` carga
+al final `config.zsh` y que está en `.gitignore`. El hook `.githooks/pre-commit` revisa cada commit con
 [gitleaks](https://github.com/gitleaks/gitleaks) si está instalado (`brew install gitleaks`) y, si no, con un escaneo de
 respaldo por patrones.
 
