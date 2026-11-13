@@ -47,6 +47,7 @@ mano.
 | [Starship](https://starship.rs/) | Prompt con usuario, host, directorio y rama de Git | `.config/starship.toml` | [starship.md](docs/starship.md) |
 | [WezTerm](https://wezterm.org/) | Terminal con transparencia, pestañas abajo y atajos para dividir paneles | `.wezterm.lua` | [wezterm.md](docs/wezterm.md) |
 | [Rio](https://rioterm.com/) | Terminal alternativa con el mismo aspecto | `.config/rio/` | [rio.md](docs/rio.md) |
+| [iTerm2](https://iterm2.com/) | Terminal de macOS con el mismo aspecto, los atajos de división de WezTerm y el directorio heredado en ventanas, pestañas y paneles | `Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json` (en `darwin/`) | [iterm2.md](docs/iterm2.md) |
 | [bat](https://github.com/sharkdp/bat) | `cat` con resaltado, con el tema Dracula corregido para que los números de línea se lean | `.config/bat/` | [bat.md](docs/bat.md) |
 | [Git](https://git-scm.com/) | Alias `gll` y `gls` para ver el historial como grafo | `.gitconfig` | [git.md](docs/git.md) |
 | [delta](https://github.com/dandavison/delta) | Pager de Git con resaltado, números de línea y enlaces, tema Dracula | `.gitconfig` | [delta.md](docs/delta.md) |
@@ -54,7 +55,8 @@ mano.
 | [Neovim](https://neovim.io/) | [LazyVim](https://www.lazyvim.org/) con corrector en español, portapapeles para WSL, extras de lenguajes, Markdown renderizado y markdownlint sin falsos avisos | `.config/nvim/`, `.markdownlint-cli2.yaml` | [neovim.md](docs/neovim.md) |
 | [Claude Code](https://code.claude.com/docs) | Reglas globales (`pnpm` en lugar de `npm`) y un statusline con modelo, contexto y límites de uso | `.claude/` | [claude-code.md](docs/claude-code.md) |
 
-Las rutas de la columna Archivos son relativas a `common/` en el repositorio y a `~` una vez instaladas.
+Las rutas de la columna Archivos son relativas a `common/` en el repositorio (salvo la de iTerm2, en `darwin/`) y a `~`
+una vez instaladas.
 
 <p align="center">
   <img src="docs/img/statusline.svg" alt="Statusline de Claude Code con el contexto al 42, 68 y 87 por ciento" width="100%">
@@ -77,6 +79,7 @@ Instala solo los de las herramientas que vayas a usar.
 | Plugins de Zsh | `zsh-syntax-highlighting`, `zsh-autosuggestions`, `fzf-tab` | Ver [zsh.md](docs/zsh.md#instalación) | Ver [zsh.md](docs/zsh.md#instalación) |
 | starship, lsd, bat, tldr | Prompt y alias de `.zshrc` | `brew install starship lsd bat tlrc` | `sudo apt install lsd bat tldr` + [starship](https://starship.rs/#quick-install) |
 | WezTerm o Rio | Emulador de terminal | `brew install --cask wezterm` / `brew install --cask rio` | [wezterm.org](https://wezterm.org/install/linux.html) / [rioterm.com](https://rioterm.com/docs/install) |
+| iTerm2 | Emulador de terminal, solo macOS | `brew install --cask iterm2` | No aplica |
 | Neovim | Editor | `brew install neovim` | [neovim.io](https://github.com/neovim/neovim/blob/master/INSTALL.md) |
 | delta | Pager de `.gitconfig` | `brew install git-delta` | Ver [delta.md](docs/delta.md) |
 | fzf, fd, ripgrep, tmux | Búsqueda y multiplexor | `brew install fzf fd ripgrep tmux` | `sudo apt install fzf fd-find ripgrep tmux` |
@@ -116,6 +119,11 @@ ln -s "$(pwd)/common/.config/bat/config"             ~/.config/bat/config
 ln -s "$(pwd)/common/.config/bat/themes"             ~/.config/bat/themes
 ln -s "$(pwd)/common/.claude/statusline-command.sh"  ~/.claude/statusline-command.sh
 ln -s "$(pwd)/common/.claude/CLAUDE.md"              ~/.claude/CLAUDE.md
+
+# Solo macOS: perfil de iTerm2 (la ruta lleva un espacio)
+mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
+ln -s "$(pwd)/darwin/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json" \
+  ~/Library/Application\ Support/iTerm2/DynamicProfiles/dotfiles.json
 ```
 
 `ln -s` falla si el destino ya existe: revisa ese archivo, guarda lo que quieras conservar y bórralo o renómbralo antes.
@@ -155,6 +163,8 @@ Para Claude Code, además, **fusiona** a mano los bloques `statusLine` y `permis
 - **En Debian/Ubuntu, fd se llama `fdfind`.** Sin un enlace `fd`, fzf usa su propio recorrido de archivos.
 - **En Debian/Ubuntu, bat se llama `batcat`.** El alias `cat` de `.zshrc` lo detecta solo.
 - **Con teclado Spanish-ISO, `Ctrl+Shift+O` es la letra O, no el cero.** `Ctrl+Shift+0` en WezTerm agranda la fuente.
+- **iTerm2 no usa el perfil `Dotfiles` hasta marcarlo como predeterminado.** Settings → Profiles → Other Actions… → Set
+  as Default, una vez por equipo. Ver [iterm2.md](docs/iterm2.md#instalación).
 
 ## Estructura del repositorio
 
@@ -163,15 +173,17 @@ common/            Archivos que se instalan, con la misma ruta que tendrán bajo
   .zshrc  .zshrc.local.example  .gitconfig  .wezterm.lua  .ripgreprc  .markdownlint-cli2.yaml
   .config/         starship.toml, zsh/, nvim/, rio/, bat/, tmux/
   .claude/         CLAUDE.md, statusline-command.sh, settings.json.example
+darwin/            Archivos que solo se instalan en macOS
+  Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json
 docs/              Guía de cada herramienta e imágenes
 akmon.json         Índice de lo que se puede instalar con akmon
 .githooks/         Hook pre-commit que bloquea secretos
 ```
 
 El primer segmento de cada ruta es el sistema operativo (`common`, `darwin`, `linux` o `windows`) y el resto es la ruta
-bajo `~`: `common/.config/nvim/init.lua` se instala en `~/.config/nvim/init.lua`. Todo está en `common/` porque las
+bajo `~`: `common/.config/nvim/init.lua` se instala en `~/.config/nvim/init.lua`. Casi todo está en `common/` porque las
 diferencias entre sistemas se resuelven dentro de cada archivo (detección de WSL en Neovim, `target_triple` en WezTerm,
-`[platform]` en Rio) en lugar de duplicarlos.
+`[platform]` en Rio) en lugar de duplicarlos. La excepción es iTerm2, que solo existe en macOS y va en `darwin/`.
 
 `akmon.json` declara cada herramienta como un elemento independiente con su lista de archivos. **Un archivo que no esté
 en esa lista no se instala con akmon.**
@@ -193,6 +205,7 @@ Cada guía explica qué configura el repositorio, cómo seguir configurándolo y
 | Módulos y colores del prompt | [docs/starship.md](docs/starship.md) |
 | Atajos y opciones de WezTerm | [docs/wezterm.md](docs/wezterm.md) |
 | Opciones de Rio y su bloque por sistema | [docs/rio.md](docs/rio.md) |
+| Perfil, atajos y directorio heredado de iTerm2 | [docs/iterm2.md](docs/iterm2.md) |
 | Tema y estilo de bat | [docs/bat.md](docs/bat.md) |
 | Por qué el tema Dracula de bat difiere del original | [docs/bat-dracula-line-numbers.md](docs/bat-dracula-line-numbers.md) |
 | Alias de Git y ejemplos de salida | [docs/git.md](docs/git.md) |

@@ -42,7 +42,7 @@ Se declaran en el bloque `[platform]`, que solo aplica en el sistema indicado:
 - `config.toml` conserva la plantilla oficial de Rio como comentarios: cada opción viene documentada en el propio
   archivo. Para activarla, descoméntala; no borres esos bloques.
 - Rio recarga la configuración al guardar.
-- Un cambio de tema o de fuente debe repetirse en [WezTerm](wezterm.md) y en [bat](bat.md).
+- Un cambio de tema o de fuente debe repetirse en [WezTerm](wezterm.md), [iTerm2](iterm2.md) y [bat](bat.md).
 
 ## Documentación oficial
 

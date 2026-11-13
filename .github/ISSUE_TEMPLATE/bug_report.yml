@@ -16,6 +16,7 @@ body:
         - starship
         - wezterm
         - rio
+        - iterm2
         - bat
         - git
         - neovim

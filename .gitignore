@@ -138,9 +138,3 @@ id_ed25519*
 .bash_history
 .node_repl_history
 .python_history
-
-
-
-CLAUDE.md
-# Reglas globales de Claude Code: sí se versionan (destino ~/.claude/CLAUDE.md)
-!common/.claude/CLAUDE.md

@@ -35,6 +35,14 @@
     ]
   },
   {
+    "id": "iterm2",
+    "name": "iTerm2",
+    "description": "Perfil dinámico para macOS con tema Dracula, JetBrainsMono Nerd Font, atajos para dividir paneles y directorio heredado en ventanas, pestañas y paneles nuevos",
+    "files": [
+      "darwin/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json"
+    ]
+  },
+  {
     "id": "bat",
     "name": "Bat",
     "description": "Visor de archivos con tema Dracula corregido para que los números de línea sean legibles",

@@ -56,7 +56,8 @@ Todo se resuelve con `wezterm.target_triple` dentro del mismo archivo, sin dupli
 - Edita `common/.wezterm.lua`; WezTerm recarga la configuración al guardar.
 - Para un atajo nuevo añade una entrada a `config.keys`. Si solo aplica a un sistema, añádela con `table.insert` dentro
   del bloque `if wezterm.target_triple:find(...)` correspondiente, como se hace con los de Windows.
-- Un cambio de tema o de fuente debe repetirse en [Rio](rio.md) y en [bat](bat.md) para mantener el aspecto unificado.
+- Un cambio de tema o de fuente debe repetirse en [Rio](rio.md), [iTerm2](iterm2.md) y [bat](bat.md) para mantener el
+  aspecto unificado. Los atajos de división se repiten en iTerm2.
 
 ## Documentación oficial
 
