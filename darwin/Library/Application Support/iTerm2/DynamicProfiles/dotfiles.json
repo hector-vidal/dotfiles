@@ -5,6 +5,7 @@
       "Guid": "29ADFDFE-A6CA-44A8-86FD-66ACC094030E",
       "Normal Font": "JetBrainsMonoNFM-Regular 13",
       "Custom Directory": "Recycle",
+      "Scrollback in Alternate Screen": false,
       "Keyboard Map": {
         "0x45-0x60000-0xe": {
           "Action": 29,

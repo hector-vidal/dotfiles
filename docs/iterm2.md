@@ -31,6 +31,7 @@ siguen abriéndose con el perfil anterior.
 | `Name` / `Guid` | `Dotfiles`, GUID fijo | Identifica el perfil; los atajos de división apuntan a ese GUID |
 | `Normal Font` | `JetBrainsMonoNFM-Regular 13` | JetBrainsMono Nerd Font Mono a 13, la fuente común a todas las herramientas |
 | `Custom Directory` | `Recycle` | Ventanas, pestañas y paneles nuevos abren en el directorio de la sesión activa |
+| `Scrollback in Alternate Screen` | `false` | Las aplicaciones de pantalla completa (LazyGit, Neovim, gitcosmo) no dejan copias de su pantalla en el historial al redimensionar la ventana o al redibujarse. Es "Save lines to scrollback in alternate screen mode" en Settings > Profiles > Terminal |
 | `Ansi 0 Color` … `Selection Color` | Dracula | Colores de [dracula/iterm](https://github.com/dracula/iterm), copiados tal cual |
 
 Lo que no está en el JSON lo hereda el perfil de los valores por defecto de iTerm2.
