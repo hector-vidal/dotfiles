@@ -12,3 +12,7 @@
 
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"
+
+# Markdown con frontmatter YAML y bloques de lenguajes que el integrado deja
+# planos (syntaxes/markdown-dotfiles.sublime-syntax). Tras tocarla: bat cache --build
+--map-syntax="*.md:Markdown (dotfiles)"

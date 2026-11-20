@@ -45,10 +45,11 @@
   {
     "id": "bat",
     "name": "Bat",
-    "description": "Visor de archivos con tema Dracula corregido para que los números de línea sean legibles",
+    "description": "Visor de archivos con tema Dracula corregido (números de línea legibles y colores de Markdown) y sintaxis Markdown con frontmatter YAML",
     "files": [
       "common/.config/bat/config",
-      "common/.config/bat/themes/Dracula.tmTheme"
+      "common/.config/bat/themes/Dracula.tmTheme",
+      "common/.config/bat/syntaxes/markdown-dotfiles.sublime-syntax"
     ]
   },
   {
